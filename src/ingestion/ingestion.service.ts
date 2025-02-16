@@ -15,7 +15,7 @@ export class IngestionService {
 
   async ingestPDF(file: Buffer): Promise<string> {
     try {
-      const text = await this.pdfService.extract(file);
+      const text = await this.pdfService.parsePdfBuffer(file);
       const chunks = this.textService.chunkText(text);
       await this.vectorDbService.storeVectors(chunks);
       return 'PDF processed successfully';
@@ -26,7 +26,7 @@ export class IngestionService {
 
   async ingestWebsite(url: string): Promise<string> {
     try {
-      const content = await this.webService.scrape(url);
+      const content = await this.webService.scrapeWebsite(url);
       const chunks = this.textService.chunkText(content);
       await this.vectorDbService.storeVectors(chunks);
       return 'Website content processed successfully';

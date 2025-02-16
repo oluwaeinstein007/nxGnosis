@@ -12,7 +12,15 @@ export class VectorDbService {
     });
   }
 
-  async search(queryVector: number[], collectionName: string) { // Example
-      // ... (qDrant search logic)
+  async storeVectors(vectors: any[]): Promise<void> {
+    await this.qdrant.upsert('default', vectors);
+  }
+  
+  async upsertEmbeddings(collectionName: string, embeddings: any[]): Promise<void> {
+    await this.qdrant.upsert(collectionName, embeddings);
+  }
+
+  async searchEmbeddings(collectionName: string, queryEmbedding: number[], topK: number): Promise<any[]> {
+    return this.qdrant.search(collectionName, queryEmbedding, topK);
   }
 }

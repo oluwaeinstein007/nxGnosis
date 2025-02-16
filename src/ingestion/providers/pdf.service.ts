@@ -13,4 +13,13 @@ export class PdfService {
       throw new Error(`Error parsing PDF: ${error.message}`);
     }
   }
+
+  async parsePdfBuffer(file: Buffer): Promise<string> {
+    try {
+      const pdfData = await pdfParse(file);
+      return pdfData.text;
+    } catch (error) {
+      throw new Error(`Error parsing PDF: ${error.message}`);
+    }
+  }
 }
