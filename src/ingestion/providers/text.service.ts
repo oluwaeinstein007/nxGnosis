@@ -10,3 +10,26 @@ export class TextService {
     return text.match(new RegExp(`.{1,${chunkSize}}`, 'g')) || [];
   }
 }
+
+
+
+
+
+// // src/ingestion/providers/text.service.ts
+// import { Injectable } from '@nestjs/common';
+// import { Document } from 'langchain/document';
+
+// @Injectable()
+// export class TextService {
+//   chunkText(text: string, chunkSize: number = 1000): Document[] {
+//     const words = text.split(' ');
+//     const chunks: Document[] = [];
+    
+//     for (let i = 0; i < words.length; i += chunkSize) {
+//       const chunk = words.slice(i, i + chunkSize).join(' ');
+//       chunks.push(new Document({ pageContent: chunk, metadata: { index: i / chunkSize } }));
+//     }
+    
+//     return chunks;
+//   }
+// }
